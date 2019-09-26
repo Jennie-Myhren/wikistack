@@ -41,7 +41,8 @@ const User = db.define('users', {
 Page.beforeValidate(userInstance => {
   userInstance.slug = userInstance.title
     .replace(/[^a-zA-Z0-9-' ']/g, '')
-    .replace(' ', '_');
+    .replace(' ', '_')
+    .toLowerCase();
 });
 
 //   db.Page.beforeValidate(pages => {

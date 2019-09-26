@@ -19,15 +19,8 @@ app.get('/', (req, res) => {
   res.send(main('hello world 2'));
 });
 
-// app.post('/wiki', (req, res) => {
-//   db.Page.beforeValidate(pages => {
-//     let slug = pages.title.replace(/[^a-zA-Z0-9-' ']/g, '').replace(' ', '_');
-//     pages.slug = slug;
-//   });
-// });
-
 async function dbSync() {
-  await db.sync({ force: true });
+  await db.sync();
 
   const PORT = 3000;
 

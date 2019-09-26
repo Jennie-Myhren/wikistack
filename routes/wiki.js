@@ -9,11 +9,11 @@ router.post('/', async (req, res, next) => {
   const page = new Page({
     title: title,
     content: content,
-    // slug: slug
   });
 
   try {
     await page.save();
+    console.log(page);
     res.redirect('/');
   } catch (error) {
     next(error);
@@ -27,6 +27,19 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res, next) => {
   res.send(addPage());
+});
+
+router.get('/:slug', async (req, res, next) => {
+  //find slug
+  const slug = await Page.findAll({
+    where: {
+      slug: req.params.slug,
+    },
+  });
+  console.log(slug);
+  ///view
+
+  res.send('hello world :)');
 });
 
 module.exports = router;
