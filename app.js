@@ -14,18 +14,16 @@ app.use(express.static(__dirname + '/public'));
 app.use('/users', userRouter);
 app.use('/wiki', wikiRouter);
 
-
-
 app.get('/', (req, res) => {
   console.log('hello world :)');
   res.send(main('hello world 2'));
 });
 
-
-
-
-// db.authenticate().then(() => {
-//   console.log('connected to the database');
+// app.post('/wiki', (req, res) => {
+//   db.Page.beforeValidate(pages => {
+//     let slug = pages.title.replace(/[^a-zA-Z0-9-' ']/g, '').replace(' ', '_');
+//     pages.slug = slug;
+//   });
 // });
 
 async function dbSync() {
