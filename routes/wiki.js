@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { addPage } = require('../views'); //TODO : ASK ABOUT THIS
 const { Page } = require('../models');
+const wikiPage = require('../views/wikipage');
 
 router.post('/', async (req, res, next) => {
   const title = req.body.title;
@@ -31,15 +32,14 @@ router.get('/add', (req, res, next) => {
 
 router.get('/:slug', async (req, res, next) => {
   //find slug
-  const slug = await Page.findAll({
+  const pageInfo = await Page.findAll({
     where: {
       slug: req.params.slug,
     },
   });
-  console.log(slug);
-  ///view
 
-  res.send('hello world :)');
+  const page = pageInfo[0];
+  res.send(wikiPage(page, 'author'));
 });
 
 module.exports = router;
