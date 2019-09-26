@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const main = require('./views/main');
-const { db } = require('./models');
+const { db, Page } = require('./models');
 const userRouter = require('./routes/users');
 const wikiRouter = require('./routes/wiki');
 
@@ -14,9 +14,9 @@ app.use(express.static(__dirname + '/public'));
 app.use('/users', userRouter);
 app.use('/wiki', wikiRouter);
 
-app.get('/', (req, res) => {
-  console.log('hello world :)');
-  res.send(main('hello world 2'));
+app.get('/', async (req, res) => {
+  const posts = await Page.findAll();
+  res.send(main(posts));
 });
 
 async function dbSync() {
